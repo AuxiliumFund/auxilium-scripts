@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AggregatorV3Interface } from "./AggregatorV3Interface";
+export type { AuxlBondDepository } from "./AuxlBondDepository";
 export type { IERC20 } from "./IERC20";
 export type { IOwnable } from "./IOwnable";
 export type { IStaking } from "./IStaking";
@@ -9,12 +10,11 @@ export type { IStakingHelper } from "./IStakingHelper";
 export type { ITreasury } from "./ITreasury";
 export type { IWAVAX9 } from "./IWAVAX9";
 export type { Ownable } from "./Ownable";
-export type { AuxlBondDepository } from "./AuxlBondDepository";
-export type { TimeBondDepository } from "./TimeBondDepository";
 export type { IBondCalculator } from "./IBondCalculator";
 export type { OwnableData } from "./OwnableData";
 
 export { AggregatorV3Interface__factory } from "./factories/AggregatorV3Interface__factory";
+export { AuxlBondDepository__factory } from "./factories/AuxlBondDepository__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
 export { IOwnable__factory } from "./factories/IOwnable__factory";
 export { IStaking__factory } from "./factories/IStaking__factory";
@@ -22,7 +22,5 @@ export { IStakingHelper__factory } from "./factories/IStakingHelper__factory";
 export { ITreasury__factory } from "./factories/ITreasury__factory";
 export { IWAVAX9__factory } from "./factories/IWAVAX9__factory";
 export { Ownable__factory } from "./factories/Ownable__factory";
-export { AuxlBondDepository__factory } from "./factories/AuxlBondDepository__factory";
-export { TimeBondDepository__factory } from "./factories/TimeBondDepository__factory";
 export { IBondCalculator__factory } from "./factories/IBondCalculator__factory";
 export { OwnableData__factory } from "./factories/OwnableData__factory";

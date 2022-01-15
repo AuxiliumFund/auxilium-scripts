@@ -17,6 +17,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
     getContractFactory(
+      name: "AuxlBondDepository",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlBondDepository__factory>;
+    getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
@@ -49,10 +53,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AuxlBondDepository__factory>;
     getContractFactory(
-      name: "TimeBondDepository",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TimeBondDepository__factory>;
-    getContractFactory(
       name: "IBondCalculator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IBondCalculator__factory>;
@@ -84,20 +84,17 @@ declare module "hardhat/types/runtime" {
       name: "OwnableData",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OwnableData__factory>;
-    getContractFactory(
-      name: "AuxlBondDepository",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.AuxlBondDepository__factory>;
-    getContractFactory(
-      name: "TimeBondDepository",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TimeBondDepository__factory>;
 
     getContractAt(
       name: "AggregatorV3Interface",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.AggregatorV3Interface>;
+    getContractAt(
+      name: "AuxlBondDepository",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlBondDepository>;
     getContractAt(
       name: "IERC20",
       address: string,
@@ -139,11 +136,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AuxlBondDepository>;
     getContractAt(
-      name: "TimeBondDepository",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TimeBondDepository>;
-    getContractAt(
       name: "IBondCalculator",
       address: string,
       signer?: ethers.Signer
@@ -183,16 +175,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.OwnableData>;
-    getContractAt(
-      name: "AuxlBondDepository",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.AuxlBondDepository>;
-    getContractAt(
-      name: "TimeBondDepository",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TimeBondDepository>;
 
     // default types
     getContractFactory(
