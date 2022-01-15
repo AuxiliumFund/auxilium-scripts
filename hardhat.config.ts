@@ -30,6 +30,11 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+	fuji: {
+		url: "https://api.avax-test.network/ext/bc/C/rpc",
+		accounts:
+		  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+	  },
 	// local: {
 	// 	url: "",
 	// 	forking: ,
