@@ -13,6 +13,114 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AuxlERC20Token",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlERC20Token__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "ERC20Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Permit__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC2612Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC2612Permit__factory>;
+    getContractFactory(
+      name: "IOwnable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IOwnable__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "VaultOwned",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VaultOwned__factory>;
+    getContractFactory(
+      name: "IAuxlBondDepository",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAuxlBondDepository__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC20Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Metadata__factory>;
+    getContractFactory(
+      name: "IUniswapV2Factory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2Factory__factory>;
+    getContractFactory(
+      name: "IUniswapV2Pair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2Pair__factory>;
+    getContractFactory(
+      name: "IUniswapV2Router02",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2Router02__factory>;
+    getContractFactory(
+      name: "IWETH",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWETH__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "WonderlandZapInV1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WonderlandZapInV1__factory>;
+    getContractFactory(
+      name: "ZapBaseV21",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZapBaseV21__factory>;
+    getContractFactory(
+      name: "ZapInBaseV31",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZapInBaseV31__factory>;
+    getContractFactory(
+      name: "AuxlERC20Token",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlERC20Token__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "ERC20Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Permit__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC2612Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC2612Permit__factory>;
+    getContractFactory(
+      name: "IOwnable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IOwnable__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "VaultOwned",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.VaultOwned__factory>;
+    getContractFactory(
       name: "AggregatorV3Interface",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AggregatorV3Interface__factory>;
@@ -84,7 +192,302 @@ declare module "hardhat/types/runtime" {
       name: "OwnableData",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "ERC20Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Permit__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC2612Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC2612Permit__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "OwnableData",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "StakedAuxilium",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StakedAuxilium__factory>;
+    getContractFactory(
+      name: "AuxlStaking",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlStaking__factory>;
+    getContractFactory(
+      name: "IDistributor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IDistributor__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "ISAuxl",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISAuxl__factory>;
+    getContractFactory(
+      name: "IWarmup",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWarmup__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "OwnableData",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "Distributor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Distributor__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "ITreasury",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITreasury__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "OwnableData",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IStaking",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IStaking__factory>;
+    getContractFactory(
+      name: "StakingHelper",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StakingHelper__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "StakingWarmup",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.StakingWarmup__factory>;
+    getContractFactory(
+      name: "AuxlBondingCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlBondingCalculator__factory>;
+    getContractFactory(
+      name: "IBondingCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBondingCalculator__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IUniswapV2ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2ERC20__factory>;
+    getContractFactory(
+      name: "IUniswapV2Pair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2Pair__factory>;
+    getContractFactory(
+      name: "AuxlTreasury",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlTreasury__factory>;
+    getContractFactory(
+      name: "IAUXLERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAUXLERC20__factory>;
+    getContractFactory(
+      name: "IBondCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBondCalculator__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC20Mintable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Mintable__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
+      name: "OwnableData",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "IAUXL",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAUXL__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "WAUXL",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WAUXL__factory>;
 
+    getContractAt(
+      name: "AuxlERC20Token",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlERC20Token>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Permit>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC2612Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC2612Permit>;
+    getContractAt(
+      name: "IOwnable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IOwnable>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "VaultOwned",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultOwned>;
+    getContractAt(
+      name: "IAuxlBondDepository",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAuxlBondDepository>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC20Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Metadata>;
+    getContractAt(
+      name: "IUniswapV2Factory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2Factory>;
+    getContractAt(
+      name: "IUniswapV2Pair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2Pair>;
+    getContractAt(
+      name: "IUniswapV2Router02",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2Router02>;
+    getContractAt(
+      name: "IWETH",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWETH>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "WonderlandZapInV1",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WonderlandZapInV1>;
+    getContractAt(
+      name: "ZapBaseV21",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZapBaseV21>;
+    getContractAt(
+      name: "ZapInBaseV31",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZapInBaseV31>;
+    getContractAt(
+      name: "AuxlERC20Token",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlERC20Token>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Permit>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC2612Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC2612Permit>;
+    getContractAt(
+      name: "IOwnable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IOwnable>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "VaultOwned",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultOwned>;
     getContractAt(
       name: "AggregatorV3Interface",
       address: string,
@@ -175,6 +578,206 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Permit>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC2612Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC2612Permit>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "OwnableData",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "StakedAuxilium",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StakedAuxilium>;
+    getContractAt(
+      name: "AuxlStaking",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlStaking>;
+    getContractAt(
+      name: "IDistributor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IDistributor>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "ISAuxl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISAuxl>;
+    getContractAt(
+      name: "IWarmup",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWarmup>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "OwnableData",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "Distributor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Distributor>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "ITreasury",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITreasury>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "OwnableData",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IStaking",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IStaking>;
+    getContractAt(
+      name: "StakingHelper",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StakingHelper>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "StakingWarmup",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StakingWarmup>;
+    getContractAt(
+      name: "AuxlBondingCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlBondingCalculator>;
+    getContractAt(
+      name: "IBondingCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBondingCalculator>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IUniswapV2ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2ERC20>;
+    getContractAt(
+      name: "IUniswapV2Pair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2Pair>;
+    getContractAt(
+      name: "AuxlTreasury",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlTreasury>;
+    getContractAt(
+      name: "IAUXLERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAUXLERC20>;
+    getContractAt(
+      name: "IBondCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBondCalculator>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC20Mintable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Mintable>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "OwnableData",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "IAUXL",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAUXL>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "WAUXL",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WAUXL>;
 
     // default types
     getContractFactory(

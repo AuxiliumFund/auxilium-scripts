@@ -23,24 +23,40 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.7.5",
+  solidity: {
+    compilers: [
+      {
+        version: "0.7.5",
+		settings: {
+			optimizer: { enabled: true, runs: 200 },
+		  },
+      },
+      {
+        version: "0.8.11",
+        settings: {
+          optimizer: { enabled: true, runs: 200 },
+        },
+      },
+    ],
+  },
+
   networks: {
     avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-	fuji: {
-		url: "https://api.avax-test.network/ext/bc/C/rpc",
-		accounts:
-		  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-	  },
-	// local: {
-	// 	url: "",
-	// 	forking: ,
-	// 	accounts:
-	// 	  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-	//   },
+    fuji: {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    // local: {
+    // 	url: "",
+    // 	forking: ,
+    // 	accounts:
+    // 	  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    //   },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,

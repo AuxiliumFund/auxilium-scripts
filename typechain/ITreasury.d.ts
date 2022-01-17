@@ -21,21 +21,18 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ITreasuryInterface extends ethers.utils.Interface {
   functions: {
-    "deposit(uint256,address,uint256)": FunctionFragment;
-    "valueOf(address,uint256)": FunctionFragment;
+    "mintRewards(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "valueOf",
+    functionFragment: "mintRewards",
     values: [string, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "valueOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mintRewards",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -84,77 +81,42 @@ export class ITreasury extends BaseContract {
   interface: ITreasuryInterface;
 
   functions: {
-    deposit(
+    mintRewards(
+      _recipient: string,
       _amount: BigNumberish,
-      _token: string,
-      _profit: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    valueOf(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { value_: BigNumber }>;
   };
 
-  deposit(
+  mintRewards(
+    _recipient: string,
     _amount: BigNumberish,
-    _token: string,
-    _profit: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  valueOf(
-    _token: string,
-    _amount: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   callStatic: {
-    deposit(
-      _amount: BigNumberish,
-      _token: string,
-      _profit: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    valueOf(
-      _token: string,
+    mintRewards(
+      _recipient: string,
       _amount: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    deposit(
+    mintRewards(
+      _recipient: string,
       _amount: BigNumberish,
-      _token: string,
-      _profit: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    valueOf(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    deposit(
+    mintRewards(
+      _recipient: string,
       _amount: BigNumberish,
-      _token: string,
-      _profit: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    valueOf(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
