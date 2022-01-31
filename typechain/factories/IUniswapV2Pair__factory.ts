@@ -26,7 +26,7 @@ const _abi = [
       },
       {
         internalType: "uint32",
-        name: "blockAuxlstampLast",
+        name: "blockTimestampLast",
         type: "uint32",
       },
     ],

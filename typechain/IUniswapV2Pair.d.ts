@@ -101,7 +101,7 @@ export class IUniswapV2Pair extends BaseContract {
       [BigNumber, BigNumber, number] & {
         reserve0: BigNumber;
         reserve1: BigNumber;
-        blockAuxlstampLast: number;
+        blockTimestampLast: number;
       }
     >;
 
@@ -118,7 +118,7 @@ export class IUniswapV2Pair extends BaseContract {
     [BigNumber, BigNumber, number] & {
       reserve0: BigNumber;
       reserve1: BigNumber;
-      blockAuxlstampLast: number;
+      blockTimestampLast: number;
     }
   >;
 
@@ -135,7 +135,7 @@ export class IUniswapV2Pair extends BaseContract {
       [BigNumber, BigNumber, number] & {
         reserve0: BigNumber;
         reserve1: BigNumber;
-        blockAuxlstampLast: number;
+        blockTimestampLast: number;
       }
     >;
 

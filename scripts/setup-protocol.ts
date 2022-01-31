@@ -15,17 +15,15 @@ async function main() {
 
   const auxlTokenAddress = "0xC1e77Bb87BAa3A6918dEb560Cd0874C7662b344e";
 
-  const principle = "0x0000000000000000000000000000000000000000"; //To be set
+  const principle = "0xC1e77Bb87BAa3A6918dEb560Cd0874C7662b344e"; //To be set
   const treasuryAddress = "0x50cf6C7FDFFe87A73A70FeE9c794A971772181EF";
   const dao = "0x0000000000000000000000000000000000000000";
-  const bondCalculator = "0x0000000000000000000000000000000000000000";
-  //const bondCalculator = "0x0000000000000000000000000000000000000000"
-
+  
   // We get the contract to interact with
   const Treasury = await ethers.getContractFactory(
     "contracts/Treasury.sol:AuxlTreasury"
   );
-  const TokenContract = await ethers.getContractFactory("contracts/AuxlERC20.sol:AuxlåERC20Token")
+  const TokenContract = await ethers.getContractFactory("contracts/AuxlERC20.sol:AuxlERC20Token")
   const auxlToken = TokenContract.attach(auxlTokenAddress);
   const treasury = Treasury.attach(treasuryAddress); //Set parameters
 
@@ -33,7 +31,7 @@ async function main() {
   await auxlToken.setVault(treasuryAddress); //Set Vault in treasury 
   const vault = await auxlToken.vault();
   console.log("Vault set to: ", vault)
-  await auxlToken.
+
   //await treasury.queue();
 
   console.log("New Bond Depository deployed to:", treasury.address);

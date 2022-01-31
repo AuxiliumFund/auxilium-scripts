@@ -54,7 +54,7 @@ async function main() {
    const StakingHelper = await ethers.getContractFactory("contracts/StakingHelper.sol:StakingHelper");
    const stakingHelper = await StakingHelper.deploy(stakingContract.address, auxlToken.address);
    await stakingHelper.deployed();
-   console.log("Staking Helper  contract deployed to: ", stakingHelper.address)
+   console.log("Staking Helper contract deployed to: ", stakingHelper.address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -89,6 +89,26 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ZapInBaseV31__factory>;
     getContractFactory(
+      name: "IBondingCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBondingCalculator__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IUniswapV2ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2ERC20__factory>;
+    getContractFactory(
+      name: "IUniswapV2Pair",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV2Pair__factory>;
+    getContractFactory(
+      name: "TimeBondingCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TimeBondingCalculator__factory>;
+    getContractFactory(
       name: "AuxlERC20Token",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AuxlERC20Token__factory>;
@@ -192,6 +212,10 @@ declare module "hardhat/types/runtime" {
       name: "OwnableData",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OwnableData__factory>;
+    getContractFactory(
+      name: "ERC20Mock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Mock__factory>;
     getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -352,6 +376,14 @@ declare module "hardhat/types/runtime" {
       name: "WAUXL",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WAUXL__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
 
     getContractAt(
       name: "AuxlERC20Token",
@@ -448,6 +480,31 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ZapInBaseV31>;
+    getContractAt(
+      name: "IBondingCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBondingCalculator>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IUniswapV2ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2ERC20>;
+    getContractAt(
+      name: "IUniswapV2Pair",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV2Pair>;
+    getContractAt(
+      name: "TimeBondingCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TimeBondingCalculator>;
     getContractAt(
       name: "AuxlERC20Token",
       address: string,
@@ -578,6 +635,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.OwnableData>;
+    getContractAt(
+      name: "ERC20Mock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Mock>;
     getContractAt(
       name: "ERC20",
       address: string,
@@ -778,6 +840,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.WAUXL>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
 
     // default types
     getContractFactory(
