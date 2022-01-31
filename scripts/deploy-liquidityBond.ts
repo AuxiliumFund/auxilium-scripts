@@ -38,9 +38,12 @@ async function main() {
 
   await treasury.queue(5, principle);
 
+  await treasury.toggle(5, principle)
+
   console.log("Setting bond in the Treasury...");
 
   await treasury.queue(4, bondDepository.address);
+  await treasury.toggle(4, bondDepository.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

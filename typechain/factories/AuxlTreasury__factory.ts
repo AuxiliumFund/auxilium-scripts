@@ -1119,7 +1119,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "sOHMQueue",
+    name: "sAUXLQueue",
     outputs: [
       {
         internalType: "uint256",

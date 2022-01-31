@@ -266,7 +266,7 @@ contract AuxlTreasury is Ownable {
         LIQUIDITYMANAGER, 
         DEBTOR, 
         REWARDMANAGER, 
-        SOHM 
+        SAUXL 
     }
 
     IAUXLERC20 public immutable Auxl;
@@ -317,7 +317,7 @@ contract AuxlTreasury is Ownable {
     uint256 public limitAmount;
 
     IERC20 public AUXLries;
-    uint public sOHMQueue; // Delays change to sOHM address
+    uint public sAUXLQueue; // Delays change to sAUXL address
     
     uint public totalReserves; // Risk-free value of all assets
     uint public totalDebt;
@@ -334,8 +334,8 @@ contract AuxlTreasury is Ownable {
         isReserveToken[ _MIM ] = true;
         reserveTokens.push( _MIM );
 
-    //    isLiquidityToken[ _OHMDAI ] = true;
-    //    liquidityTokens.push( _OHMDAI );
+    //    isLiquidityToken[ _AUXLDAI ] = true;
+    //    liquidityTokens.push( _AUXLDAI );
 
         secondsNeededForQueue = _secondsNeededForQueue;
         limitAmount = _limitAmount;
@@ -406,7 +406,7 @@ contract AuxlTreasury is Ownable {
 
         uint value = valueOf( _token, _amount );
 
-        uint maximumDebt = AUXLries.balanceOf( msg.sender ); // Can only borrow against sOHM held
+        uint maximumDebt = AUXLries.balanceOf( msg.sender ); // Can only borrow against sAUXL held
         uint balance = debtorBalance[ msg.sender ];
         uint availableDebt = maximumDebt.sub( balance );
         require( value <= availableDebt, "Exceeds debt limit" );
@@ -565,8 +565,8 @@ contract AuxlTreasury is Ownable {
             debtorQueue[ _address ] = uint32(block.timestamp).add32( secondsNeededForQueue );
         } else if ( _managing == MANAGING.REWARDMANAGER ) { // 8
             rewardManagerQueue[ _address ] = uint32(block.timestamp).add32( secondsNeededForQueue );
-        } else if ( _managing == MANAGING.SOHM ) { // 9
-            sOHMQueue = uint32(block.timestamp).add32( secondsNeededForQueue );
+        } else if ( _managing == MANAGING.SAUXL ) { // 9
+            sAUXLQueue = uint32(block.timestamp).add32( secondsNeededForQueue );
         } else return false;
 
         emit ChangeQueued( _managing, _address );
@@ -682,8 +682,8 @@ contract AuxlTreasury is Ownable {
             result = !isRewardManager[ _address ];
             isRewardManager[ _address ] = result;
 
-        } else if ( _managing == MANAGING.SOHM ) { // 9
-            sOHMQueue = 0;
+        } else if ( _managing == MANAGING.SAUXL ) { // 9
+            sAUXLQueue = 0;
             AUXLries = IERC20(_address);
             result = true;
 

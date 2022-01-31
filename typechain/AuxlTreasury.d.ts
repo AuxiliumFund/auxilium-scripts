@@ -67,7 +67,7 @@ interface AuxlTreasuryInterface extends ethers.utils.Interface {
     "reserveTokens(uint256)": FunctionFragment;
     "rewardManagerQueue(address)": FunctionFragment;
     "rewardManagers(uint256)": FunctionFragment;
-    "sOHMQueue()": FunctionFragment;
+    "sAUXLQueue()": FunctionFragment;
     "secondsNeededForQueue()": FunctionFragment;
     "setLimitAmount(uint256)": FunctionFragment;
     "toggle(uint8,address,address)": FunctionFragment;
@@ -247,7 +247,7 @@ interface AuxlTreasuryInterface extends ethers.utils.Interface {
     functionFragment: "rewardManagers",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "sOHMQueue", values?: undefined): string;
+  encodeFunctionData(functionFragment: "sAUXLQueue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "secondsNeededForQueue",
     values?: undefined
@@ -435,7 +435,7 @@ interface AuxlTreasuryInterface extends ethers.utils.Interface {
     functionFragment: "rewardManagers",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "sOHMQueue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sAUXLQueue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "secondsNeededForQueue",
     data: BytesLike
@@ -806,7 +806,7 @@ export class AuxlTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    sOHMQueue(overrides?: CallOverrides): Promise<[BigNumber]>;
+    sAUXLQueue(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     secondsNeededForQueue(overrides?: CallOverrides): Promise<[number]>;
 
@@ -1006,7 +1006,7 @@ export class AuxlTreasury extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  sOHMQueue(overrides?: CallOverrides): Promise<BigNumber>;
+  sAUXLQueue(overrides?: CallOverrides): Promise<BigNumber>;
 
   secondsNeededForQueue(overrides?: CallOverrides): Promise<number>;
 
@@ -1223,7 +1223,7 @@ export class AuxlTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    sOHMQueue(overrides?: CallOverrides): Promise<BigNumber>;
+    sAUXLQueue(overrides?: CallOverrides): Promise<BigNumber>;
 
     secondsNeededForQueue(overrides?: CallOverrides): Promise<number>;
 
@@ -1643,7 +1643,7 @@ export class AuxlTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    sOHMQueue(overrides?: CallOverrides): Promise<BigNumber>;
+    sAUXLQueue(overrides?: CallOverrides): Promise<BigNumber>;
 
     secondsNeededForQueue(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1901,7 +1901,7 @@ export class AuxlTreasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    sOHMQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    sAUXLQueue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     secondsNeededForQueue(
       overrides?: CallOverrides
