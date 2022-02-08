@@ -199,7 +199,7 @@ export class ISAuxl extends BaseContract {
     index(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     rebase(
-      ohmProfit_: BigNumberish,
+      auxlProfit_: BigNumberish,
       epoch_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -251,7 +251,7 @@ export class ISAuxl extends BaseContract {
   index(overrides?: CallOverrides): Promise<BigNumber>;
 
   rebase(
-    ohmProfit_: BigNumberish,
+    auxlProfit_: BigNumberish,
     epoch_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -303,7 +303,7 @@ export class ISAuxl extends BaseContract {
     index(overrides?: CallOverrides): Promise<BigNumber>;
 
     rebase(
-      ohmProfit_: BigNumberish,
+      auxlProfit_: BigNumberish,
       epoch_: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -394,7 +394,7 @@ export class ISAuxl extends BaseContract {
     index(overrides?: CallOverrides): Promise<BigNumber>;
 
     rebase(
-      ohmProfit_: BigNumberish,
+      auxlProfit_: BigNumberish,
       epoch_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -450,7 +450,7 @@ export class ISAuxl extends BaseContract {
     index(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     rebase(
-      ohmProfit_: BigNumberish,
+      auxlProfit_: BigNumberish,
       epoch_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

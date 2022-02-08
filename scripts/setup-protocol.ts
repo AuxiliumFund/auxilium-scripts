@@ -19,6 +19,8 @@ async function main() {
   // We get the contract to interact with
   const TokenContract = await ethers.getContractFactory("contracts/AuxlERC20.sol:AuxlERC20Token")
   const auxlToken = TokenContract.attach(auxlTokenAddress);
+  const StakingContract = await ethers.getContractFactory("contracts/Staking.sol;AuxlStaking")
+  const stakingContract = StakingContract.attach("StakingAddress");
 
   const signer = ethers.provider.getSigner();
 
@@ -30,6 +32,13 @@ async function main() {
   await auxlToken.setVault(treasuryAddress); //Set Vault in treasury 
   const vault = await auxlToken.vault();
   console.log("Vault set to: ", vault)
+
+  // Set the Distributor and WarmUp in the Staking Contract
+
+  console.log("Setting Distributor and Warmup in the Staking Contract...")
+  await stakingContract.setContract(0, stakingDistributor.address);
+  await stakingContract.setContract(1, stakingWarmup.address);
+  console.log("Staking contract setup, complete")
   
 }
 

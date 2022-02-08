@@ -55,6 +55,13 @@ async function main() {
    const stakingHelper = await StakingHelper.deploy(stakingContract.address, auxlToken.address);
    await stakingHelper.deployed();
    console.log("Staking Helper contract deployed to: ", stakingHelper.address)
+
+   // Set the Distributor and WarmUp in the Staking Contract
+
+   console.log("Setting Distributor and Warmup in the Staking Contract...")
+   await stakingContract.setContract(0, stakingDistributor.address);
+   await stakingContract.setContract(1, stakingWarmup.address);
+   console.log("Staking contract setup, complete")
 }
 
 // We recommend this pattern to be able to use async/await everywhere

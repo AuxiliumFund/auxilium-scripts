@@ -205,7 +205,7 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "ohmProfit_",
+        name: "auxlProfit_",
         type: "uint256",
       },
       {

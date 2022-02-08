@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity 0.7.5;
 
+import "openzeppelin-contracts/token/ERC1155"
+
 library LowGasSafeMath {
     /// @notice Returns x + y, reverts if sum overflows uint256
     /// @param x The augend
@@ -46,7 +48,7 @@ library LowGasSafeMath {
     /// @param x The minuend
     /// @param y The subtrahend
     /// @return z The difference of x and y
-    function sub(int256 x, int256 y) internal pure returns (int256 z) {
+    function sub(int256 x, int256 y) internal pure returns (int256u z) {
         require((z = x - y) <= x == (y >= 0));
     }
 }
@@ -538,7 +540,7 @@ contract AuxlStaking is Ownable {
     IWarmup public warmupContract;
     uint public warmupPeriod;
 
-    event LogStake(address indexed recipient, uint256 amount);
+    event LogStake(address indexed recipient, uint256 amount, bool nftStaked);
     event LogClaim(address indexed recipient, uint256 amount);
     event LogForfeit(address indexed recipient, uint256 memoAmount, uint256 timeAmount);
     event LogDepositLock(address indexed user, bool locked);
@@ -548,7 +550,8 @@ contract AuxlStaking is Ownable {
     event LogWarmupPeriod(uint period);
     
     constructor ( 
-        address _Auxl, 
+        address _Auxl,
+		address _Nft 
         address _sAuxl, 
         uint32 _epochLength,
         uint _firstEpochNumber,
@@ -558,6 +561,8 @@ contract AuxlStaking is Ownable {
         Auxl = IERC20(_Auxl);
         require( _sAuxl != address(0) );
         sAuxl = ISAuxl(_sAuxl);
+		require( _NFT != address(0) );
+		NFT = 
         
         epoch = Epoch({
             length: _epochLength,
@@ -580,7 +585,27 @@ contract AuxlStaking is Ownable {
         @param _amount uint
         @return bool
      */
-    function stake( uint _amount, address _recipient ) external returns ( bool ) {
+    function stake( uint _amount, address _recipient, bool nftStaked ) external returns ( bool ) {
+        rebase();
+        
+        Auxl.safeTransferFrom( msg.sender, address(this), _amount );
+
+        Claim memory info = warmupInfo[ _recipient ];
+        require( !info.lock, "Deposits for account are locked" );
+
+        warmupInfo[ _recipient ] = Claim ({
+            deposit: info.deposit.add( _amount ),
+            gons: info.gons.add( sAuxl.gonsForBalance( _amount ) ),
+            expiry: epoch.number.add( warmupPeriod ),
+            lock: false
+        });
+        
+        sAuxl.safeTransfer( address(warmupContract), _amount );
+        emit LogStake(_recipient, _amount);
+        return true;
+    }
+
+	function stakeNFT( uint _amount, address _recipient ) external returns ( bool ) {
         rebase();
         
         Auxl.safeTransferFrom( msg.sender, address(this), _amount );
