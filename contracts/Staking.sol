@@ -620,10 +620,10 @@ contract AuxlStaking is Ownable {
     function forfeit() external {
         Claim memory info = warmupInfo[ msg.sender ];
         delete warmupInfo[ msg.sender ];
-        uint memoBalance = sAuxl.balanceForGons( info.gons );
-        warmupContract.retrieve( address(this),  memoBalance);
+        uint sauxlBalance = sAuxl.balanceForGons( info.gons );
+        warmupContract.retrieve( address(this),  sauxlBalance);
         Auxl.safeTransfer( msg.sender, info.deposit);
-        emit LogForfeit(msg.sender, memoBalance, info.deposit);
+        emit LogForfeit(msg.sender, sauxlBalance, info.deposit);
     }
 
     /**

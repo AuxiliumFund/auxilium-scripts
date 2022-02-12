@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity 0.7.5;
 
-import "openzeppelin-contracts/token/ERC1155"
+import "openzeppelin-contracts/token/ERC1155/IERC1155.sol";
 
 library LowGasSafeMath {
     /// @notice Returns x + y, reverts if sum overflows uint256
@@ -48,7 +48,7 @@ library LowGasSafeMath {
     /// @param x The minuend
     /// @param y The subtrahend
     /// @return z The difference of x and y
-    function sub(int256 x, int256 y) internal pure returns (int256u z) {
+    function sub(int256 x, int256 y) internal pure returns (int256 z) {
         require((z = x - y) <= x == (y >= 0));
     }
 }
@@ -507,6 +507,7 @@ interface ISAuxl is IERC20 {
     function index() external view returns ( uint );
 }
 
+
 interface IWarmup {
     function retrieve( address staker_, uint amount_ ) external;
 }
@@ -524,6 +525,7 @@ contract AuxlStaking is Ownable {
 
     IERC20 public immutable Auxl;
     ISAuxl public immutable sAuxl;
+	IERC1155 public immutable NFT;
 
     struct Epoch {
         uint number;
@@ -535,10 +537,13 @@ contract AuxlStaking is Ownable {
 
     IDistributor public distributor;
     
-    uint public totalBonus;
-    
+    uint8 public totalBonus;
+	uint8 public warmupPeriod;
+
     IWarmup public warmupContract;
-    uint public warmupPeriod;
+
+	mapping(uint8 => bool) public whitelistedTokenIDs;
+	mapping(address => uint8) public getStakedTokenForAddress;
 
     event LogStake(address indexed recipient, uint256 amount, bool nftStaked);
     event LogClaim(address indexed recipient, uint256 amount);
@@ -551,7 +556,7 @@ contract AuxlStaking is Ownable {
     
     constructor ( 
         address _Auxl,
-		address _Nft 
+		address _Nft, 
         address _sAuxl, 
         uint32 _epochLength,
         uint _firstEpochNumber,
@@ -562,7 +567,7 @@ contract AuxlStaking is Ownable {
         require( _sAuxl != address(0) );
         sAuxl = ISAuxl(_sAuxl);
 		require( _NFT != address(0) );
-		NFT = 
+		NFT = IERC1155(_NFT);
         
         epoch = Epoch({
             length: _epochLength,
@@ -575,19 +580,49 @@ contract AuxlStaking is Ownable {
     struct Claim {
         uint deposit;
         uint gons;
-        uint expiry;
+        uint8 expiry;
+		uint8 tokenID;
         bool lock; // prevents malicious delays
+		bool nftStaked;
     }
     mapping( address => Claim ) public warmupInfo;
+
+	function permitNFTForStaking(uint256 tokenId) external onlyOwner {
+	whitelistedTokenIDs[tokenId] = true;
+	}
+
+	function removeNFTForStaking(uint256 tokenId) external onlyOwner {
+	whitelistedTokenIDs[tokenId] = false;
+	}
 
     /**
         @notice stake Auxl to enter warmup
         @param _amount uint
         @return bool
      */
-    function stake( uint _amount, address _recipient, bool nftStaked ) external returns ( bool ) {
+    function stake( uint _amount, address _recipient, uint256 _tokenId) external returns ( bool ) {
         rebase();
         
+		require(NFT.balanceOf(msg.sender, _tokenId) >= 0 || warmupInfo[msg.sender].nftStaked , "Must provide/have provided at least 1 tokenId");
+            require(
+                   whitelistedTokenIDs[_tokenId] ,
+                "Token must be stakable by you!"
+            );
+
+			if (warmupInfo[msg.sender].nftStaked == false) {
+            NFT.safeTransferFrom(
+                msg.sender,
+                address(this),
+                _tokenId, 
+				1, //Only take one of the NFTs from the user
+				0
+            ); 
+			getStakedTokenForAddress[msg.sender] = _tokenId;
+            emit NFTStaked(_tokenId); // use this on ui to show staked tokens
+			}
+
+            
+
         Auxl.safeTransferFrom( msg.sender, address(this), _amount );
 
         Claim memory info = warmupInfo[ _recipient ];
@@ -597,7 +632,9 @@ contract AuxlStaking is Ownable {
             deposit: info.deposit.add( _amount ),
             gons: info.gons.add( sAuxl.gonsForBalance( _amount ) ),
             expiry: epoch.number.add( warmupPeriod ),
-            lock: false
+			tokenID: _tokenID,
+            lock: false,
+			nftStaked: true
         });
         
         sAuxl.safeTransfer( address(warmupContract), _amount );
@@ -605,25 +642,6 @@ contract AuxlStaking is Ownable {
         return true;
     }
 
-	function stakeNFT( uint _amount, address _recipient ) external returns ( bool ) {
-        rebase();
-        
-        Auxl.safeTransferFrom( msg.sender, address(this), _amount );
-
-        Claim memory info = warmupInfo[ _recipient ];
-        require( !info.lock, "Deposits for account are locked" );
-
-        warmupInfo[ _recipient ] = Claim ({
-            deposit: info.deposit.add( _amount ),
-            gons: info.gons.add( sAuxl.gonsForBalance( _amount ) ),
-            expiry: epoch.number.add( warmupPeriod ),
-            lock: false
-        });
-        
-        sAuxl.safeTransfer( address(warmupContract), _amount );
-        emit LogStake(_recipient, _amount);
-        return true;
-    }
 
     /**
         @notice retrieve AUXL from warmup
@@ -645,10 +663,10 @@ contract AuxlStaking is Ownable {
     function forfeit() external {
         Claim memory info = warmupInfo[ msg.sender ];
         delete warmupInfo[ msg.sender ];
-        uint memoBalance = sAuxl.balanceForGons( info.gons );
-        warmupContract.retrieve( address(this),  memoBalance);
+        uint sauxlBalance = sAuxl.balanceForGons( info.gons );
+        warmupContract.retrieve( address(this),  sauxlBalance);
         Auxl.safeTransfer( msg.sender, info.deposit);
-        emit LogForfeit(msg.sender, memoBalance, info.deposit);
+        emit LogForfeit(msg.sender, sauxlBalance, info.deposit);
     }
 
     /**
@@ -660,7 +678,7 @@ contract AuxlStaking is Ownable {
     }
 
     /**
-        @notice redeem AUXL for Auxl
+        @notice redeem sAUXL for Auxl
         @param _amount uint
         @param _trigger bool
      */
@@ -672,6 +690,23 @@ contract AuxlStaking is Ownable {
         Auxl.safeTransfer( msg.sender, _amount );
         emit LogUnstake(msg.sender, _amount);
     }
+
+	/**
+		@notice redeem all sAuxl for the equivalent Auxl and return the NFT
+		@notice the only way a staked user can retrive their NFT is through this function
+	 */
+
+	function unstakeAll() external {
+		uint stakedBalance = sAuxl.balanceOf(msg.sender);
+		require(getStakedTokenForAddress[msg.sender] > 0, "NFT not Staked");
+		sAuxl.safeTransferFrom( msg.sender, address(this), stakedBalance );
+        Auxl.safeTransfer( msg.sender, stakedBalance );
+		uint8 tokenID = getStakedTokenForAddress[msg.sender]; //These two lines prevent reentrancy attacks
+		delete getStakedTokenForAddress[msg.sender];
+		NFT.safeTransferFrom(address(this), msg.sender, tokenID, 1, 0);
+        emit LogUnstake(msg.sender, _amount);
+
+	}
 
     /**
         @notice returns the AUXL index, which tracks rebase growth
