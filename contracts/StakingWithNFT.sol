@@ -545,7 +545,8 @@ contract AuxlStaking is Ownable {
 	mapping(uint8 => bool) public whitelistedTokenIDs;
 	mapping(address => uint8) public getStakedTokenForAddress;
 
-    event LogStake(address indexed recipient, uint256 amount, bool nftStaked);
+    event LogStake(address indexed recipient, uint256 amount);
+    event NFTStake(uint256 tokenId);
     event LogClaim(address indexed recipient, uint256 amount);
     event LogForfeit(address indexed recipient, uint256 memoAmount, uint256 timeAmount);
     event LogDepositLock(address indexed user, bool locked);
@@ -618,10 +619,8 @@ contract AuxlStaking is Ownable {
 				0
             ); 
 			getStakedTokenForAddress[msg.sender] = _tokenId;
-            emit NFTStaked(_tokenId); // use this on ui to show staked tokens
+            emit NFTStake(_tokenId); // use this on ui to show staked tokens
 			}
-
-            
 
         Auxl.safeTransferFrom( msg.sender, address(this), _amount );
 
