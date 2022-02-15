@@ -95,13 +95,13 @@ const _abi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "memoAmount",
+        name: "sAuxlAmount",
         type: "uint256",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "timeAmount",
+        name: "auxlAmount",
         type: "uint256",
       },
     ],

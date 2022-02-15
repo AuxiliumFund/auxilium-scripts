@@ -191,8 +191,8 @@ export type LogDepositLockEvent = TypedEvent<
 export type LogForfeitEvent = TypedEvent<
   [string, BigNumber, BigNumber] & {
     recipient: string;
-    memoAmount: BigNumber;
-    timeAmount: BigNumber;
+    sAuxlAmount: BigNumber;
+    auxlAmount: BigNumber;
   }
 >;
 
@@ -567,20 +567,20 @@ export class AuxlStaking extends BaseContract {
 
     "LogForfeit(address,uint256,uint256)"(
       recipient?: string | null,
-      memoAmount?: null,
-      timeAmount?: null
+      sAuxlAmount?: null,
+      auxlAmount?: null
     ): TypedEventFilter<
       [string, BigNumber, BigNumber],
-      { recipient: string; memoAmount: BigNumber; timeAmount: BigNumber }
+      { recipient: string; sAuxlAmount: BigNumber; auxlAmount: BigNumber }
     >;
 
     LogForfeit(
       recipient?: string | null,
-      memoAmount?: null,
-      timeAmount?: null
+      sAuxlAmount?: null,
+      auxlAmount?: null
     ): TypedEventFilter<
       [string, BigNumber, BigNumber],
-      { recipient: string; memoAmount: BigNumber; timeAmount: BigNumber }
+      { recipient: string; sAuxlAmount: BigNumber; auxlAmount: BigNumber }
     >;
 
     "LogRebase(uint256)"(

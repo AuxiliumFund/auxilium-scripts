@@ -540,7 +540,7 @@ contract AuxlStaking is Ownable {
 
     event LogStake(address indexed recipient, uint256 amount);
     event LogClaim(address indexed recipient, uint256 amount);
-    event LogForfeit(address indexed recipient, uint256 memoAmount, uint256 timeAmount);
+    event LogForfeit(address indexed recipient, uint256 sAuxlAmount, uint256 auxlAmount);
     event LogDepositLock(address indexed user, bool locked);
     event LogUnstake(address indexed recipient, uint256 amount);
     event LogRebase(uint256 distribute);

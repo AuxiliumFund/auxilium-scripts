@@ -43,12 +43,6 @@ async function main() {
 
    //Deploy Staking Contract, Helper, Warm Up and Distributor
 
-   const NftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
-   //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const nftStakingContract = await StakingContract.deploy(auxlToken.address, sAuxlToken.address, 28800, 0, 1642287973);
-   await stakingContract.deployed();
-   console.log("Staking Contract deployed to: ", stakingContract.address);
-
    const StakingWarmup = await ethers.getContractFactory("contracts/StakingWarmup.sol:StakingWarmup");
    const stakingWarmup = await StakingWarmup.deploy(stakingContract.address, sAuxlToken.address);
    await stakingWarmup.deployed();
