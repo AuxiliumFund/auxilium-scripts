@@ -51,7 +51,7 @@ async function main() {
    console.log("Staking contract setup, complete")
 
 
-   //Deploy NFT Staking Contracts, Helper, Warm Up 
+   //Deploy NFT Staking Contracts
 
    const LegendaryNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
@@ -70,7 +70,6 @@ async function main() {
    const rareNftStakingContract = await RareNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await rareNftStakingContract.deployed();
    console.log("Rare NFT Staking Contract deployed to: ", rareNftStakingContract.address);
-
 
    const UncommonNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
