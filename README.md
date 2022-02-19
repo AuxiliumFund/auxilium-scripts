@@ -35,17 +35,21 @@ List of most recent Smart Contracts deployed on Avalanche Fuji Testnet:
 
 TOKENS 
 
-Auxl Token: 
+Auxl Token: 0xC7FA9a29dD6F0AAb0E582B94F572B0CfdE134249
 
-sAuxl Token:
+sAuxl Token: 0x8EB0C673f977Fd145d23A9f0dF92A63E59246028
+
+Nft Token(s) Contract: 0x27C079186768BF1Ba71B088375520206d9C59233
+
+Mock Stable Coin: 
 
 RESERVES
 
-Treasury:
+Treasury: 0x37AC509E65403965223dE0F4BD18198BD235D059
 
 STAKING
 
-Staking Contract:
+Staking Contract: 0x7892E3f26F7Cf66ABF445378A23443e9561d9a2E
 
 Legendary NFT Staking Contract:
 
@@ -59,7 +63,8 @@ Common NFT Staking Contract:
 
 STAKING SUPPORT
 
-Staking Distributor:
+Staking Distributor: 0xcfFC7F03c44CE4dD1c9e0E6eD9330953691a96e0
 
-Staking Helper:
+Staking Helper: 0x4A6a6e9e627c6CCaF1f2Ba48ACB4e270adaBb1f6
 
+Staking WarmUp: 0xDbF78e39E0E4a92f18c4be330679Ea8436Ce4940

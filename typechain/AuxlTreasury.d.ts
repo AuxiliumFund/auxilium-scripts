@@ -247,7 +247,10 @@ interface AuxlTreasuryInterface extends ethers.utils.Interface {
     functionFragment: "rewardManagers",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "sAUXLQueue", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "sAUXLQueue",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "secondsNeededForQueue",
     values?: undefined

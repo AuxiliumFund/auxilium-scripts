@@ -50,4 +50,6 @@ contract MockGenesisNFT is ERC1155, Ownable {
 		tokenIdToString[newTokenId] = tokenName;
 		_mint(msg.sender, newTokenId, _amount, "");
 	}
+
+	
 }

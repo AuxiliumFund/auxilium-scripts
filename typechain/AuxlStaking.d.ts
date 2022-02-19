@@ -22,30 +22,37 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 interface AuxlStakingInterface extends ethers.utils.Interface {
   functions: {
     "Auxl()": FunctionFragment;
+    "NFT()": FunctionFragment;
     "claim(address)": FunctionFragment;
     "claimOwnership()": FunctionFragment;
     "contractBalance()": FunctionFragment;
     "distributor()": FunctionFragment;
     "epoch()": FunctionFragment;
     "forfeit()": FunctionFragment;
+    "getStakedTokenForAddress(address)": FunctionFragment;
     "index()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "permitNFTForStaking(uint8)": FunctionFragment;
     "rebase()": FunctionFragment;
+    "removeNFTForStaking(uint8)": FunctionFragment;
     "sAuxl()": FunctionFragment;
     "setContract(uint8,address)": FunctionFragment;
-    "setWarmup(uint256)": FunctionFragment;
-    "stake(uint256,address)": FunctionFragment;
+    "setWarmup(uint8)": FunctionFragment;
+    "stake(uint256,address,uint8)": FunctionFragment;
     "toggleDepositLock()": FunctionFragment;
     "totalBonus()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
     "unstake(uint256,bool)": FunctionFragment;
+    "unstakeAll()": FunctionFragment;
     "warmupContract()": FunctionFragment;
     "warmupInfo(address)": FunctionFragment;
     "warmupPeriod()": FunctionFragment;
+    "whitelistedTokenIDs(uint8)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "Auxl", values?: undefined): string;
+  encodeFunctionData(functionFragment: "NFT", values?: undefined): string;
   encodeFunctionData(functionFragment: "claim", values: [string]): string;
   encodeFunctionData(
     functionFragment: "claimOwnership",
@@ -61,13 +68,25 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
   encodeFunctionData(functionFragment: "forfeit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getStakedTokenForAddress",
+    values: [string]
+  ): string;
   encodeFunctionData(functionFragment: "index", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "permitNFTForStaking",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "rebase", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "removeNFTForStaking",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "sAuxl", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setContract",
@@ -79,7 +98,7 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "stake",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "toggleDepositLock",
@@ -98,6 +117,10 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
     values: [BigNumberish, boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "unstakeAll",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "warmupContract",
     values?: undefined
   ): string;
@@ -106,8 +129,13 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
     functionFragment: "warmupPeriod",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelistedTokenIDs",
+    values: [BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "Auxl", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "NFT", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "claimOwnership",
@@ -123,13 +151,25 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "epoch", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "forfeit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getStakedTokenForAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "index", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "permitNFTForStaking",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "rebase", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeNFTForStaking",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sAuxl", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setContract",
@@ -147,6 +187,7 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "unstake", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "unstakeAll", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "warmupContract",
     data: BytesLike
@@ -154,6 +195,10 @@ interface AuxlStakingInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "warmupInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "warmupPeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelistedTokenIDs",
     data: BytesLike
   ): Result;
 
@@ -266,6 +311,8 @@ export class AuxlStaking extends BaseContract {
   functions: {
     Auxl(overrides?: CallOverrides): Promise<[string]>;
 
+    NFT(overrides?: CallOverrides): Promise<[string]>;
+
     claim(
       _recipient: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -294,13 +341,28 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    getStakedTokenForAddress(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
     index(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
+    permitNFTForStaking(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     rebase(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    removeNFTForStaking(
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -320,6 +382,7 @@ export class AuxlStaking extends BaseContract {
     stake(
       _amount: BigNumberish,
       _recipient: string,
+      _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -327,7 +390,7 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    totalBonus(overrides?: CallOverrides): Promise<[BigNumber]>;
+    totalBonus(overrides?: CallOverrides): Promise<[number]>;
 
     transferOwnership(
       newOwner: string,
@@ -342,24 +405,37 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    unstakeAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     warmupContract(overrides?: CallOverrides): Promise<[string]>;
 
     warmupInfo(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
+      [BigNumber, BigNumber, BigNumber, BigNumber, boolean, boolean] & {
         deposit: BigNumber;
         gons: BigNumber;
         expiry: BigNumber;
+        tokenID: BigNumber;
         lock: boolean;
+        nftStaked: boolean;
       }
     >;
 
-    warmupPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
+    warmupPeriod(overrides?: CallOverrides): Promise<[number]>;
+
+    whitelistedTokenIDs(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   Auxl(overrides?: CallOverrides): Promise<string>;
+
+  NFT(overrides?: CallOverrides): Promise<string>;
 
   claim(
     _recipient: string,
@@ -389,13 +465,28 @@ export class AuxlStaking extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  getStakedTokenForAddress(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
   index(overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+  permitNFTForStaking(
+    tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   rebase(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  removeNFTForStaking(
+    tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -415,6 +506,7 @@ export class AuxlStaking extends BaseContract {
   stake(
     _amount: BigNumberish,
     _recipient: string,
+    _tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -422,7 +514,7 @@ export class AuxlStaking extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  totalBonus(overrides?: CallOverrides): Promise<BigNumber>;
+  totalBonus(overrides?: CallOverrides): Promise<number>;
 
   transferOwnership(
     newOwner: string,
@@ -437,24 +529,37 @@ export class AuxlStaking extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  unstakeAll(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   warmupContract(overrides?: CallOverrides): Promise<string>;
 
   warmupInfo(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, boolean] & {
+    [BigNumber, BigNumber, BigNumber, BigNumber, boolean, boolean] & {
       deposit: BigNumber;
       gons: BigNumber;
       expiry: BigNumber;
+      tokenID: BigNumber;
       lock: boolean;
+      nftStaked: boolean;
     }
   >;
 
-  warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+  warmupPeriod(overrides?: CallOverrides): Promise<number>;
+
+  whitelistedTokenIDs(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     Auxl(overrides?: CallOverrides): Promise<string>;
+
+    NFT(overrides?: CallOverrides): Promise<string>;
 
     claim(_recipient: string, overrides?: CallOverrides): Promise<void>;
 
@@ -477,13 +582,28 @@ export class AuxlStaking extends BaseContract {
 
     forfeit(overrides?: CallOverrides): Promise<void>;
 
+    getStakedTokenForAddress(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
     index(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+    permitNFTForStaking(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     rebase(overrides?: CallOverrides): Promise<void>;
+
+    removeNFTForStaking(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     sAuxl(overrides?: CallOverrides): Promise<string>;
 
@@ -501,12 +621,13 @@ export class AuxlStaking extends BaseContract {
     stake(
       _amount: BigNumberish,
       _recipient: string,
+      _tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     toggleDepositLock(overrides?: CallOverrides): Promise<void>;
 
-    totalBonus(overrides?: CallOverrides): Promise<BigNumber>;
+    totalBonus(overrides?: CallOverrides): Promise<number>;
 
     transferOwnership(
       newOwner: string,
@@ -521,21 +642,30 @@ export class AuxlStaking extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    unstakeAll(overrides?: CallOverrides): Promise<void>;
+
     warmupContract(overrides?: CallOverrides): Promise<string>;
 
     warmupInfo(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
+      [BigNumber, BigNumber, BigNumber, BigNumber, boolean, boolean] & {
         deposit: BigNumber;
         gons: BigNumber;
         expiry: BigNumber;
+        tokenID: BigNumber;
         lock: boolean;
+        nftStaked: boolean;
       }
     >;
 
-    warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    warmupPeriod(overrides?: CallOverrides): Promise<number>;
+
+    whitelistedTokenIDs(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -667,6 +797,8 @@ export class AuxlStaking extends BaseContract {
   estimateGas: {
     Auxl(overrides?: CallOverrides): Promise<BigNumber>;
 
+    NFT(overrides?: CallOverrides): Promise<BigNumber>;
+
     claim(
       _recipient: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -686,13 +818,28 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    getStakedTokenForAddress(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     index(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    permitNFTForStaking(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     rebase(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    removeNFTForStaking(
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -712,6 +859,7 @@ export class AuxlStaking extends BaseContract {
     stake(
       _amount: BigNumberish,
       _recipient: string,
+      _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -734,15 +882,26 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    unstakeAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     warmupContract(overrides?: CallOverrides): Promise<BigNumber>;
 
     warmupInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     warmupPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+    whitelistedTokenIDs(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     Auxl(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    NFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     claim(
       _recipient: string,
@@ -763,13 +922,28 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    getStakedTokenForAddress(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     index(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    permitNFTForStaking(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     rebase(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    removeNFTForStaking(
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -789,6 +963,7 @@ export class AuxlStaking extends BaseContract {
     stake(
       _amount: BigNumberish,
       _recipient: string,
+      _tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -811,6 +986,10 @@ export class AuxlStaking extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    unstakeAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     warmupContract(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     warmupInfo(
@@ -819,5 +998,10 @@ export class AuxlStaking extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     warmupPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    whitelistedTokenIDs(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }
