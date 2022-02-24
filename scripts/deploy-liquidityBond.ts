@@ -22,8 +22,10 @@ async function main() {
   const treasury = Treasury.attach("0x50cf6C7FDFFe87A73A70FeE9c794A971772181EF");
   const dao = "0x50cf6C7FDFFe87A73A70FeE9c794A971772181EF";
 
-  const bondCalculator = "0x92c7e16d66ddcc1fdcccbdd2eeb507eed0baecb2"; //Liquidity Token Bonds
-  //const bondCalculator = "0x0000000000000000000000000000000000000000" //Reserve Token Bonds
+  //If Bond Calculator is not deployed, uncomment the below lines...
+  const BondCalculator = await ethers.getContractFactory("contracts/AuxlBondingCalculator.sol:AuxlBondingCalculator")
+  const bondCalculator = await BondCalculator.deploy();
+  //const bondCalculator = "0x92c7e16d66ddcc1fdcccbdd2eeb507eed0baecb2"; //Liquidity Token Bonds
 
 
   // We get the contract to deploy

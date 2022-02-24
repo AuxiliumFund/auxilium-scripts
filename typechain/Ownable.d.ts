@@ -21,33 +21,24 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface OwnableInterface extends ethers.utils.Interface {
   functions: {
-    "claimOwnership()": FunctionFragment;
     "owner()": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
-    "transferOwnership(address,bool,bool)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "claimOwnership",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "pendingOwner",
+    functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [string, boolean, boolean]
+    values: [string]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "claimOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "pendingOwner",
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -110,48 +101,36 @@ export class Ownable extends BaseContract {
   interface: OwnableInterface;
 
   functions: {
-    claimOwnership(
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
     transferOwnership(
       newOwner: string,
-      direct: boolean,
-      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  claimOwnership(
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
   transferOwnership(
     newOwner: string,
-    direct: boolean,
-    renounce: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    claimOwnership(overrides?: CallOverrides): Promise<void>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     transferOwnership(
       newOwner: string,
-      direct: boolean,
-      renounce: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -175,35 +154,27 @@ export class Ownable extends BaseContract {
   };
 
   estimateGas: {
-    claimOwnership(
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
     transferOwnership(
       newOwner: string,
-      direct: boolean,
-      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    claimOwnership(
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     transferOwnership(
       newOwner: string,
-      direct: boolean,
-      renounce: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

@@ -13,19 +13,19 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  const auxlTokenAddress = "0xC1e77Bb87BAa3A6918dEb560Cd0874C7662b344e";
-  const treasuryAddress = "0x50cf6C7FDFFe87A73A70FeE9c794A971772181EF";
+  const auxlTokenAddress = "0xC7FA9a29dD6F0AAb0E582B94F572B0CfdE134249";
+  const treasuryAddress = "0x37AC509E65403965223dE0F4BD18198BD235D059";
   
   // We get the contract to interact with
   const TokenContract = await ethers.getContractFactory("contracts/AuxlERC20.sol:AuxlERC20Token")
   const auxlToken = TokenContract.attach(auxlTokenAddress);
-  const StakingContract = await ethers.getContractFactory("contracts/Staking.sol;AuxlStaking")
-  const stakingContract = StakingContract.attach("StakingAddress");
+//   const StakingContract = await ethers.getContractFactory("contracts/Staking.sol;AuxlStaking")
+//   const stakingContract = StakingContract.attach("StakingAddress");
 
   const signer = ethers.provider.getSigner();
 
   console.log("Minting initial supply...")
-  await auxlToken.mint(signer.getAddress, '100000000000')
+  await auxlToken.mint(signer.getAddress(), '100000000000')
 
   console.log("Setting Vault as the Treasury in Token Contract");
   //Params
@@ -35,10 +35,10 @@ async function main() {
 
   // Set the Distributor and WarmUp in the Staking Contract
 
-  console.log("Setting Distributor and Warmup in the Staking Contract...")
-  await stakingContract.setContract(0, stakingDistributor.address);
-  await stakingContract.setContract(1, stakingWarmup.address);
-  console.log("Staking contract setup, complete")
+//   console.log("Setting Distributor and Warmup in the Staking Contract...")
+//   await stakingContract.setContract(0, 'stakingDistributor.address');
+//   await stakingContract.setContract(1, 'stakingWarmup.address');
+//   console.log("Staking contract setup, complete")
   
 }
 
