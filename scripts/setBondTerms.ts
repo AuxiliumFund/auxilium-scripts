@@ -21,7 +21,7 @@ async function main() {
   const bondCalculator = "0x0000000000000000000000000000000000000000";
   //const bondCalculator = "0x0000000000000000000000000000000000000000"
 
-  const bondDepositoryAddress = ""
+  const bondDepositoryAddress = "0xC220EC06725F73A319A661aFE94511b002a00B79"
 
 
   // We get the contract to deploy
@@ -29,7 +29,10 @@ async function main() {
   const bondDepository = BondDepository.attach(bondDepositoryAddress); //Set parameters
 
   //Params
-  await bondDepository.setBondTerms();
+
+  await bondDepository.initializeBondTerms(50, '10000', '1000', 0, 0, 43200);
+
+  //await bondDepository.setBondTerms();
 
   console.log("New Bond Depository deployed to:", bondDepository.address);
 }

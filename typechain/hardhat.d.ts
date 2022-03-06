@@ -89,6 +89,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ZapInBaseV31__factory>;
     getContractFactory(
+      name: "AuxlBondingCalculator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuxlBondingCalculator__factory>;
+    getContractFactory(
       name: "IBondingCalculator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IBondingCalculator__factory>;
@@ -572,6 +576,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ZapInBaseV31>;
+    getContractAt(
+      name: "AuxlBondingCalculator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuxlBondingCalculator>;
     getContractAt(
       name: "IBondingCalculator",
       address: string,

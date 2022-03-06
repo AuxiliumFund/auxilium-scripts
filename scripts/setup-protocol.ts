@@ -25,6 +25,7 @@ async function main() {
   const signer = ethers.provider.getSigner();
 
   console.log("Minting initial supply...")
+  await auxlToken.setVault(signer.getAddress()); //Set Vault in treasury 
   await auxlToken.mint(signer.getAddress(), '100000000000')
 
   console.log("Setting Vault as the Treasury in Token Contract");

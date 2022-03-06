@@ -15,7 +15,7 @@ async function main() {
 
   const auxl = "0xC1e77Bb87BAa3A6918dEb560Cd0874C7662b344e";
 
-  const principle = "0x5db0735cf88f85e78ed742215090c465979b5006"; 
+  const principle = "0xB56B90d9733eE494263748134b4e0BAbD5CF224a"; 
   
   // Get the Treasury Contract
   const Treasury = await ethers.getContractFactory("contracts/Treasury.sol:AuxlTreasury")
@@ -24,28 +24,34 @@ async function main() {
 
   //If Bond Calculator is not deployed, uncomment the below lines...
   const BondCalculator = await ethers.getContractFactory("contracts/AuxlBondingCalculator.sol:AuxlBondingCalculator")
-  const bondCalculator = await BondCalculator.deploy();
-  //const bondCalculator = "0x92c7e16d66ddcc1fdcccbdd2eeb507eed0baecb2"; //Liquidity Token Bonds
+  //const bondCalculator = await BondCalculator.deploy();
+  const bondCalculator = "0x92c7e16d66ddcc1fdcccbdd2eeb507eed0baecb2"; //Liquidity Token Bonds
 
 
   // We get the contract to deploy
   const BondDepository = await ethers.getContractFactory("contracts/BondDepository.sol:AuxlBondDepository");
-  const bondDepository = await BondDepository.deploy(auxl, principle, treasury, dao, bondCalculator); //Set parameters
+  const bondDepository = await BondDepository.deploy(auxl, principle, treasury.address, dao, bondCalculator); //Set parameters
 
   await bondDepository.deployed();
 
   console.log("New Bond Depository deployed to:", bondDepository.address);
 
+  console.log("Initialising Bond Depository...", bondDepository.address);
+  
+  await bondDepository.initializeBondTerms(50, '10000', '1000', 0, 0, 432000);
+  //await bondDepository.setBondTerms(4, '10000')
+
   console.log("Setting token in the Treasury...");
 
   await treasury.queue(5, principle);
 
-  await treasury.toggle(5, principle)
+  await treasury.toggle(5, principle, bondCalculator)
 
   console.log("Setting bond in the Treasury...");
 
   await treasury.queue(4, bondDepository.address);
-  await treasury.toggle(4, bondDepository.address);
+  await treasury.toggle(4, bondDepository.address, bondCalculator);
+  console.log("Script complete")
 }
 
 // We recommend this pattern to be able to use async/await everywhere

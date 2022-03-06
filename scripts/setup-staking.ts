@@ -17,7 +17,7 @@ async function main() {
 
   const auxlTokenAddress = "";
   const sAuxlTokenAddress = "";
-  const nftAddress = "";
+  const nftAddress = "0x27C079186768BF1Ba71B088375520206d9C59233";
   const treasuryAddress = "";
    
    //Deploy Staking Contract, Helper, Warm Up and Distributor
@@ -55,33 +55,44 @@ async function main() {
 
    const LegendaryNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const legendaryNftStakingContract = await LegendaryNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
+   const legendaryNftStakingContract = await LegendaryNftStakingContract.deploy(auxlTokenAddress, nftAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await legendaryNftStakingContract.deployed();
    console.log("Legendary NFT Staking Contract deployed to: ", legendaryNftStakingContract.address);
+   console.log("Setting Distributor in the Staking Contract...")
+   await legendaryNftStakingContract.setContract(0, stakingDistributor.address);
 
    const EpicNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const epicNftStakingContract = await EpicNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
+   const epicNftStakingContract = await EpicNftStakingContract.deploy(auxlTokenAddress, nftAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await epicNftStakingContract.deployed();
    console.log("Epic NFT Staking Contract deployed to: ", epicNftStakingContract.address);
+   console.log("Setting Distributor in the Staking Contract...")
+   await epicNftStakingContract.setContract(0, stakingDistributor.address);
+
 
    const RareNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const rareNftStakingContract = await RareNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
+   const rareNftStakingContract = await RareNftStakingContract.deploy(auxlTokenAddress, nftAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await rareNftStakingContract.deployed();
    console.log("Rare NFT Staking Contract deployed to: ", rareNftStakingContract.address);
+   console.log("Setting Distributor in the Staking Contract...")
+   await rareNftStakingContract.setContract(0, stakingDistributor.address);
 
    const UncommonNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const uncommonNftStakingContract = await UncommonNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
+   const uncommonNftStakingContract = await UncommonNftStakingContract.deploy(auxlTokenAddress, nftAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await uncommonNftStakingContract.deployed();
    console.log("Uncommon NFT Staking Contract deployed to: ", uncommonNftStakingContract.address);
+   console.log("Setting Distributor in the Staking Contract...")
+   await uncommonNftStakingContract.setContract(0, stakingDistributor.address);
 
    const CommonNftStakingContract = await ethers.getContractFactory("contracts/StakingWithNFT.sol:AuxlStaking");
    //Params: Token, Staking Token, Epoch length, First Epoch that has rewards, First Epoch time in Unix seconds
-   const commonNftStakingContract = await CommonNftStakingContract.deploy(auxlTokenAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
+   const commonNftStakingContract = await CommonNftStakingContract.deploy(auxlTokenAddress, nftAddress, sAuxlTokenAddress, 28800, 0, 1642287973);
    await commonNftStakingContract.deployed();
    console.log("Common NFT Staking Contract deployed to: ", commonNftStakingContract.address);
+   console.log("Setting Distributor in the Staking Contract...")
+   await commonNftStakingContract.setContract(0, stakingDistributor.address);
 
 }
 
